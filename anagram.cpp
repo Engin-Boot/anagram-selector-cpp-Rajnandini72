@@ -1,51 +1,66 @@
 #include "anagram.h"
-#include <string> 
-#include <cstring> 
-#include <algorithm>
+#include <string>  
+#include <cctype>
 #include <vector> 
-const std::vector<std::string>& areAnagram = {};
+#include <bits/stdc++.h>
+#include<algorithm>
+
 bool Anagram::WordPairIsAnagram(const std::string& word1, const std::string& word2)
 {
-    int word1Length = word1.length();
-    int word2Length = word2.length();
-    if (word1Length != word2Length)
+    std::string word1Sorted=word1;
+    std::string word2Sorted=word2;
+    word1Sorted.erase(std::remove_if(word1Sorted.begin(), word1Sorted.end(), ::isspace), word1Sorted.end());
+    word2Sorted.erase(std::remove_if(word2Sorted.begin(), word2Sorted.end(), ::isspace), word2Sorted.end());
+    int word1Length = word1Sorted.size();
+    int word2Length = word2Sorted.size();
+    if (word1Length == word2Length)
     {
-        return false;
-    }
-    else {
-        sort(word1.begin(), word1.end());
-        sort(word2.begin(), word2.end());
-        for (int i = 0; i < word1Length; i++)
-            if (word1[i] != word2[i])
-                return false;
-        return true;
-    }
+        transform(word1Sorted.begin(), word1Sorted.end(), word1Sorted.begin(), ::tolower);
+        transform(word2Sorted.begin(), word2Sorted.end(), word2Sorted.begin(), ::tolower);
+        std::sort(word1Sorted.begin(), word1Sorted.end());
+        std::sort(word2Sorted.begin(), word2Sorted.end());
        
+        if (word1Sorted.compare(word2Sorted) == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    return false;
 }
 
 std::vector<std::string> Anagram::SelectAnagrams(
     const std::string& word,
-    const std::vector<std::string>& candidates) 
+    const std::vector<std::string>& candidates)
 {
-   
-    for (int i = 0; i < candidates.size(); i++)
+    //Fill the correct implementation here
+    std::vector<std::string> areAnagrams = {};
+    for (unsigned int i = 0; i < candidates.size(); i++)
     {
-        
-        int word1Length = word.length();
-        int word2Length = candidates[i].length();
-        if (word1Length != word2Length)
-            break;
-        else
-            sort(word.begin(), word.end());
-            sort(candidates[i].begin(), candidates[i].end());
-            const std::string& s=candidates[i];
-            for (int i = 0; i < word1Length; i++)
-                if (word[i] != s[i])
-                    break;
-            const std::vector<std::string>& areAnagram = { s };
+        std::string wordsort = word;
+        std::string s = candidates[i];
+        wordsort.erase(std::remove_if(wordsort.begin(), wordsort.end(), ::isspace), wordsort.end());
+        s.erase(std::remove_if(s.begin(), s.end(), ::isspace), s.end());
+        int word1Length = wordsort.length();
+        int word2Length = s.length();
+        if (word1Length == word2Length)
+        {
+            transform(wordsort.begin(), wordsort.end(), wordsort.begin(), ::tolower);
+            transform(s.begin(), s.end(), s.begin(), ::tolower);
+            std::sort(wordsort.begin(), wordsort.end());
+            std::sort(s.begin(), s.end());
+
+            if (wordsort.compare(s) == 0)
+                areAnagrams.push_back(candidates[i]);
+        }
 
 
     }
-   
-    return areAnagram;
+    return areAnagrams;
 }
+
+
