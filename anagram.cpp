@@ -21,13 +21,8 @@ bool Anagram::WordPairIsAnagram(const std::string& word1, const std::string& wor
         std::sort(word2Sorted.begin(), word2Sorted.end());
        
         if (word1Sorted.compare(word2Sorted) == 0)
-        {
             return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;   
         
     }
     return false;
@@ -57,8 +52,6 @@ std::vector<std::string> Anagram::SelectAnagrams(
             if (wordsort.compare(s) == 0)
                 areAnagrams.push_back(candidates[i]);
         }
-
-
     }
     return areAnagrams;
 }
