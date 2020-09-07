@@ -17,10 +17,10 @@ bool Anagram::WordPairIsAnagram(const std::string& word1, const std::string& wor
     transform(word2Sorted.begin(), word2Sorted.end(), word2Sorted.begin(), ::tolower);
     if (word1Sorted.compare(word2Sorted) == 0)
         return false;
-    else if (word1Length ==1 || word2Length ==1)
-        return false;
     else if (word1Length == word2Length)
     {
+        if (word1Length == 1)
+            return false;
         std::sort(word1Sorted.begin(), word1Sorted.end());
         std::sort(word2Sorted.begin(), word2Sorted.end());
        
