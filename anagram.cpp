@@ -21,10 +21,6 @@ bool Anagram::WordPairIsAnagram(const std::string& word1, const std::string& wor
         return false;
     else if (word1Length == word2Length)
     {
-        /*transform(word1Sorted.begin(), word1Sorted.end(), word1Sorted.begin(), ::tolower);
-        transform(word2Sorted.begin(), word2Sorted.end(), word2Sorted.begin(), ::tolower);
-        if (word1Sorted.compare(word2Sorted) == 0)
-            return false;*/
         std::sort(word1Sorted.begin(), word1Sorted.end());
         std::sort(word2Sorted.begin(), word2Sorted.end());
        
